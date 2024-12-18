@@ -5,7 +5,7 @@ Purpose: API entry point
 
 ###LICENSE DETAILS###
 License: MIT License
-Copyright (c) 2024 [Aloysius aka Trojan]
+Copyright (c) 2024 [Aloysius]
 """
 
 from typing import Union

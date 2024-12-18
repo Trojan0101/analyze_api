@@ -1,14 +1,16 @@
 [tool.poetry]
-name = "analyze-api"
+name = "analyze_api"
 version = "1.0.0"
 description = "Extract, analyze, and answer questions about single or multiple page pdf's using a combination of ocr, machine learning, and large language models."
-authors = ["Aloysius", "Trojan"]
+authors = ["Aloysius"]
 license = "MIT License"
 readme = "README.md"
+packages = [{include = "analyze_api"}]
 
 [tool.poetry.dependencies]
 python = "3.11.9"
 fastapi = {extras = ["standard"], version = "^0.115.6"}
+uvicorn = "^0.34.0"
 
 
 [tool.poetry.group.dev.dependencies]
