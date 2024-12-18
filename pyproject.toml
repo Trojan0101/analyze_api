@@ -11,6 +11,8 @@ packages = [{include = "analyze_api"}]
 python = "3.11.9"
 fastapi = {extras = ["standard"], version = "^0.115.6"}
 uvicorn = "^0.34.0"
+pymupdf = "^1.25.1"
+pypdf2 = "^3.0.1"
 
 
 [tool.poetry.group.dev.dependencies]
