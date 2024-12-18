@@ -2,12 +2,13 @@
 name = "analyze-api"
 version = "1.0.0"
 description = "Extract, analyze, and answer questions about single or multiple page pdf's using a combination of ocr, machine learning, and large language models."
-authors = ["Aloysius"]
+authors = ["Aloysius", "Trojan"]
 license = "MIT License"
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "3.11.9"
+fastapi = {extras = ["standard"], version = "^0.115.6"}
 
 
 [tool.poetry.group.dev.dependencies]
@@ -21,7 +22,6 @@ debugpy = "^1.8.11"
 radon = "^6.0.1"
 pylint = "^3.3.2"
 pre-commit = "^4.0.1"
-sphinx = "^8.1.3"
 
 [build-system]
 requires = ["poetry-core"]
