@@ -8,7 +8,7 @@
 ## Pre-requisite:
 
 - Python 3.11.9 is required. Download and install from [Python Website](https://www.python.org/downloads/release/python-3119/).
-- Poetry is required. Install from [Poetry documentation](https://python-poetry.org/docs/)
+- Poetry is required. Install from [Poetry documentation](https://python-poetry.org/docs/).
 
 ## Install dependencies:
 
