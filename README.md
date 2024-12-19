@@ -14,3 +14,5 @@ You can install this package using `pip`:
 
 ```bash
 pip install analyze_api
+
+## Stakeholder: Aloysius, Trojan Software Development [Freelance_Internal]
