@@ -65,7 +65,7 @@ async def analyze_pdf(file: UploadFile, library: str = Form(...)):
         # Return JSON response
         return JSONResponse(
             content={
-                "status": ErrorMessages.ERROR_ANALYZE_001.value,
+                "status": "failure",
                 "request_id": request_id,
                 "message": str(e),
                 "filename": file.filename if file else "unknown"
