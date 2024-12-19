@@ -8,12 +8,14 @@ License: MIT License
 Copyright (c) 2024 [Aloysius]
 """
 import logging
+import os
+
 
 class CustomLogging:
     """CustomLogging"""
 
     @staticmethod
-    def setup_logger(name: str, log_file: str = "../logs/analyze_api_logs.log", level: int = logging.INFO):
+    def setup_logger(name: str, log_file: str = "./logs/analyze_api_logs.log", level: int = logging.INFO):
         """
         Method to setup custom logging
 
@@ -23,13 +25,20 @@ class CustomLogging:
 
         :return: Logger instance
         """
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
-        handler = logging.FileHandler(log_file)
-        handler.setFormatter(formatter)
+        # Check and create log file if it is not present
+        log_file_path = os.path.join(log_file)
+        log_dir = os.path.dirname(log_file_path)
+        if log_dir and not os.path.exists(log_dir):
+            os.makedirs(log_dir)
 
         logger = logging.getLogger(name)
-        logger.setLevel(level)
-        logger.addHandler(handler)
+
+        # Prevent adding duplicate handlers
+        if not logger.hasHandlers():
+            formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+            handler = logging.FileHandler(log_file)
+            handler.setFormatter(formatter)
+            logger.addHandler(handler)
+            logger.setLevel(level)
 
         return logger

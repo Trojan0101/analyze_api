@@ -10,6 +10,7 @@ Copyright (c) 2024 [Aloysius]
 import fitz
 
 from analyze_api.core.pdf.pdf_reader_interface import PdfReaderInterface
+
 from analyze_api.utilities.custom_exceptions.pdf_processing_exception import PDFProcessingException
 from analyze_api.utilities.custom_logger import CustomLogging
 from analyze_api.utilities.custom_messages.error_messages import ErrorMessages
@@ -17,6 +18,7 @@ from analyze_api.utilities.custom_messages.info_messages import InfoMessages
 
 # Setup logging
 LOGGER = CustomLogging.setup_logger("PyMuPDFReader")
+
 
 class PyMuPDFReader(PdfReaderInterface):
 
@@ -37,8 +39,10 @@ class PyMuPDFReader(PdfReaderInterface):
             doc = fitz.open(file_path)
             num_pages = len(doc)
             text_content = [page.get_text("text") for page in doc]
-            LOGGER.info(InfoMessages.INFO_ANALYZE_005 + f" Request_id -> {request_id}")
+            LOGGER.info(f"{InfoMessages.INFO_ANALYZE_005.value}; Request_id -> {request_id}")
             return {"num_pages": num_pages, "data": text_content}
         except PDFProcessingException as e:
-            LOGGER.error(ErrorMessages.ERROR_ANALYZE_004 + f" Request_id -> {request_id}" + f" Error: {str(e)}")
-            raise PDFProcessingException(ErrorMessages.ERROR_ANALYZE_004 + f" Request_id -> {request_id}" + f"Error: {str(e)}")
+            LOGGER.error(f"{ErrorMessages.ERROR_ANALYZE_004.value}; Error_message: {str(e)}; "
+                         f"Request_id -> {request_id}")
+            raise PDFProcessingException(f"{ErrorMessages.ERROR_ANALYZE_004.value}; Error_message: {str(e)}; "
+                                         f"Request_id -> {request_id}")

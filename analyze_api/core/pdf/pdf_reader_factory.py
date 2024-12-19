@@ -18,6 +18,7 @@ from analyze_api.utilities.custom_messages.info_messages import InfoMessages
 # Setup logging
 LOGGER = CustomLogging.setup_logger("PDFReaderFactory")
 
+
 class PDFReaderFactory:
     """PDFReaderFactory"""
 
@@ -32,11 +33,11 @@ class PDFReaderFactory:
         :return: PdfReaderInterface Instance of chosen library
         """
         if library == "pymupdf":
-            LOGGER.info(InfoMessages.INFO_ANALYZE_003 + f" Request_id -> {request_id}")
+            LOGGER.info(f"{InfoMessages.INFO_ANALYZE_003.value}; Request_id -> {request_id}")
             return PyMuPDFReader()
         elif library == "pypdf":
-            LOGGER.info(InfoMessages.INFO_ANALYZE_004 + f" Request_id -> {request_id}")
+            LOGGER.info(f"{InfoMessages.INFO_ANALYZE_004.value}; Request_id -> {request_id}")
             return PyPDFReader()
         else:
-            LOGGER.error(ErrorMessages.ERROR_ANALYZE_003 + f" Request_id -> {request_id}")
-            raise PDFProcessingException(ErrorMessages.ERROR_ANALYZE_003 + f" Request_id -> {request_id}")
+            LOGGER.error(f"{ErrorMessages.ERROR_ANALYZE_003.value}; Request_id -> {request_id}")
+            raise PDFProcessingException(f"{ErrorMessages.ERROR_ANALYZE_003.value}; Request_id -> {request_id}")

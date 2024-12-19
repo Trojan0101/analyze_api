@@ -11,7 +11,7 @@ from enum import Enum
 
 
 class WarningMessages(Enum):
-    WARNING_ANALYZE_001: str = "WARNING_ANALYZE_001 -> File not found or path is None."
+    WARNING_ANALYZE_001: str = "WARNING_ANALYZE_001 -> File not found or path is None"
 
     def __add__(self, other_string: str):
         """

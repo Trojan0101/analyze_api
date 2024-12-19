@@ -38,8 +38,10 @@ class PyPDFReader(PdfReaderInterface):
             reader = PdfReader(file_path)
             num_pages = len(reader.pages)
             text_content = [page.extract_text() for page in reader.pages]
-            LOGGER.info(InfoMessages.INFO_ANALYZE_006 + f" Request_id -> {request_id}")
+            LOGGER.info(f"{InfoMessages.INFO_ANALYZE_006.value}; Request_id -> {request_id}")
             return {"num_pages": num_pages, "data": text_content}
         except PDFProcessingException as e:
-            LOGGER.error(ErrorMessages.ERROR_ANALYZE_005 + f" Request_id -> {request_id}" + f" Error: {str(e)}")
-            raise PDFProcessingException(ErrorMessages.ERROR_ANALYZE_005 + f" Request_id -> {request_id}" + f" Error: {str(e)}")
+            LOGGER.error(f"{ErrorMessages.ERROR_ANALYZE_005.value}; Error_message: {str(e)}; "
+                         f"Request_id -> {request_id}")
+            raise PDFProcessingException(f"{ErrorMessages.ERROR_ANALYZE_005.value}; Error_message: {str(e)}; "
+                                         f"Request_id -> {request_id}")

@@ -20,9 +20,10 @@ from analyze_api.utilities.custom_messages.info_messages import InfoMessages
 from analyze_api.utilities.custom_messages.warning_messages import WarningMessages
 
 # Setup logging
-LOGGER = CustomLogging.setup_logger("FileValidator")
+LOGGER = CustomLogging.setup_logger("FileHelper")
 
-class FileHelper:
+
+class FileHelpers:
     """Validator to validate the type of file"""
 
     @staticmethod
@@ -36,14 +37,14 @@ class FileHelper:
         :raises: PDFProcessingException
         """
         if file.filename.endswith(".pdf"):
-            LOGGER.info(InfoMessages.INFO_ANALYZE_002 + f" Request_id -> {request_id}")
+            LOGGER.info(f"{InfoMessages.INFO_ANALYZE_002.value}; Request_id -> {request_id}")
         else:
-            LOGGER.error(ErrorMessages.ERROR_ANALYZE_002 + f" Request_id -> {request_id}")
-            raise PDFProcessingException(ErrorMessages.ERROR_ANALYZE_002 + f" Request_id -> {request_id}")
+            LOGGER.error(f"{ErrorMessages.ERROR_ANALYZE_002.value}; Request_id -> {request_id}")
+            raise PDFProcessingException(f"{ErrorMessages.ERROR_ANALYZE_002.value}; Request_id -> {request_id}")
 
     @staticmethod
     def save_temporary_file(request_id: str, file: BinaryIO, file_name: str, file_extension: str,
-                            temp_dir: str = "../temp_pdf_files") -> str:
+                            temp_dir: str = "./temp_pdf_files") -> str:
         """
         Save an uploaded file temporarily and return the file path.
 
@@ -60,14 +61,17 @@ class FileHelper:
         try:
             os.makedirs(temp_dir, exist_ok=True)
             file_path = os.path.join(temp_dir, file_name + f".{file_extension}")
+            print(file_path)
             with open(file_path, "wb") as temp_file:
                 shutil.copyfileobj(file, temp_file)
 
-            LOGGER.info(InfoMessages.INFO_ANALYZE_007 + f" Request_id -> {request_id}")
+            LOGGER.info(f"{InfoMessages.INFO_ANALYZE_007.value}; Request_id -> {request_id}")
             return file_path
         except Exception as e:
-            LOGGER.error(ErrorMessages.ERROR_ANALYZE_006 + f" Request_id -> {request_id}")
-            raise PDFProcessingException(ErrorMessages.ERROR_ANALYZE_006 + f" Request_id -> {request_id}")
+            LOGGER.error(f"{ErrorMessages.ERROR_ANALYZE_006.value}; Error_message: {str(e)}; "
+                         f"Request_id -> {request_id}")
+            raise PDFProcessingException(f"{ErrorMessages.ERROR_ANALYZE_006.value}; Error_message: {str(e)}; "
+                                         f"Request_id -> {request_id}")
 
     @staticmethod
     def cleanup_file(request_id: str, file_path: Optional[str]):
@@ -82,9 +86,11 @@ class FileHelper:
         try:
             if file_path and os.path.exists(file_path):
                 os.remove(file_path)
-                LOGGER.info(InfoMessages.INFO_ANALYZE_008 + f" Request_id -> {request_id}")
+                LOGGER.info(f"{InfoMessages.INFO_ANALYZE_008.value}; Request_id -> {request_id}")
             else:
-                LOGGER.warning(WarningMessages.WARNING_ANALYZE_001 + f" Request_id -> {request_id}")
+                LOGGER.warning(f"{WarningMessages.WARNING_ANALYZE_001.value}; Request_id -> {request_id}")
         except Exception as e:
-            LOGGER.error(ErrorMessages.ERROR_ANALYZE_007 + f" Request_id -> {request_id}")
-            raise PDFProcessingException(ErrorMessages.ERROR_ANALYZE_007 + f" Request_id -> {request_id}")
+            LOGGER.error(f"{ErrorMessages.ERROR_ANALYZE_007.value}; Error_message: {str(e)}; "
+                         f"Request_id -> {request_id}")
+            raise PDFProcessingException(f"{ErrorMessages.ERROR_ANALYZE_007.value}; Error_message: {str(e)}; "
+                                         f"Request_id -> {request_id}")
