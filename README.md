@@ -5,7 +5,7 @@
 
 ## Pre-requisite
 
-Python 3.11.9 is required. Download and install from official python website.
+- Python 3.11.9 is required. Download and install from official python website.
 
 ## Installation
 
